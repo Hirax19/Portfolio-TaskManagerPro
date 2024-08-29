@@ -1,0 +1,38 @@
+﻿@model IEnumerable<TaskManagerPro.Models.TaskItem>
+
+<h2>Tasks for @ViewBag.SelectedUser</h2>
+
+@if (!Model.Any())
+{
+    <p>No tasks assigned to this user.</p>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Deadline</th>
+                <th>Progress</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Title</td>
+                    <td>@item.Description</td>
+                    <td>@item.Deadline</td>
+                    <td>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width:@item.Progress%" aria-valuenow="@item.Progress" aria-valuemin="0" aria-valuemax="100">
+                                @item.Progress%
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

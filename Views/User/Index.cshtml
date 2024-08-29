@@ -1,0 +1,28 @@
+﻿@model IEnumerable<TaskManagerPro.Models.UserRoleViewModel>
+
+@{
+    ViewData["Title"] = "User Management";
+}
+
+<h2>User Management</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>User Name</th>
+            <th>Role</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.UserName</td>
+                <td>@user.Role</td> <!-- Updated to use 'Role' instead of 'Roles' -->
+                <td>
+                    <a asp-action="ManageRoles" asp-route-userId="@user.UserId" class="btn btn-primary">Manage Roles</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

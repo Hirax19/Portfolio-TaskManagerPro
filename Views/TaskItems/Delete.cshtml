@@ -1,0 +1,54 @@
+﻿@model TaskManagerPro.Models.TaskItem
+
+@{
+    ViewData["Title"] = "Delete Task";
+}
+
+<h1>Delete Task</h1>
+
+<h4>Are you sure you want to delete this task?</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <dl class="row">
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Title)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Title)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Deadline)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Deadline)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Progress)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Progress)%
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.AssignedTo)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.AssignedTo)
+            </dd>
+        </dl>
+
+        <form asp-action="Delete" method="post">
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <input type="submit" value="Delete" class="btn btn-danger" />
+                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,79 @@
+﻿@using Microsoft.AspNetCore.Identity
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - TaskManagerPro</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body class="d-flex flex-column min-vh-100">
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-light bg-light">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">TaskManagerPro</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="TaskItems" asp-action="Index">Tasks</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="User" asp-action="Index">Users</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container-fluid flex-grow-1">
+        <div class="row">
+            <div class="col-md-3">
+                <!-- Sidebar content -->
+                <div class="list-group">
+                    <a class="list-group-item list-group-item-action" asp-area="" asp-controller="TaskItems" asp-action="Index">Task Management</a>
+                    <a class="list-group-item list-group-item-action" asp-area="" asp-controller="User" asp-action="Index">User Management</a>
+
+                    <!-- List of Users -->
+                    <div class="list-group mt-4">
+                        <h5 class="list-group-item list-group-item-secondary">Users</h5>
+                        @if (ViewBag.Users != null)
+                        {
+                            @foreach (var user in ViewBag.Users as List<IdentityUser>)
+                            {
+                                <a class="list-group-item list-group-item-action" asp-controller="TaskItems" asp-action="UserTasks" asp-route-userId="@user.Id">
+                                    @user.UserName
+                                </a>
+                            }
+                        }
+                        else
+                        {
+                            <p class="list-group-item">No users available.</p>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <main role="main" class="pb-3">
+                    @RenderBody()
+                </main>
+            </div>
+        </div>
+    </div>
+
+    <footer class="border-top footer text-muted mt-auto">
+        <div class="container">
+            &copy; @DateTime.Now.Year - TaskManagerPro - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
